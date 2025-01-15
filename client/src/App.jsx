@@ -6,6 +6,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import { ColorModeContext, useMode } from './theme'
 import Affiliate from './scenes/affiliates'
 import FormAffiliate from './scenes/form/FormAffiliate'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   const [theme, colorMode] = useMode()
@@ -24,6 +25,7 @@ function App() {
               <Route path="/form/affiliate" element={<FormAffiliate />} />
             </Routes>
           </main>
+          <ToastContainer /> {/* Add this at the end of your main content */}
         </div>
       </ThemeProvider>
     </ColorModeContext.Provider>

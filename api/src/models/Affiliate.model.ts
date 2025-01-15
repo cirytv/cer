@@ -5,6 +5,12 @@ import { Table, Column, Model, DataType, HasOne } from 'sequelize-typescript'
 })
 export default class Affiliate extends Model {
   @Column({
+    type: DataType.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  })
+  declare id: number
+  @Column({
     type: DataType.STRING,
   })
   declare businessName: string
@@ -103,4 +109,9 @@ export default class Affiliate extends Model {
     type: DataType.BOOLEAN,
   })
   declare anexarFacturaDeAsociado: boolean
+
+  @Column({
+    type: DataType.STRING,
+  })
+  declare tipoAfiliado: string
 }

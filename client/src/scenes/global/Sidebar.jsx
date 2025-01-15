@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ProSidebar, Menu, MenuItem } from 'react-pro-sidebar'
 import { Box, IconButton, Typography, useTheme } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { tokens } from '../../theme'
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined'
 import PeopleOutlinedIcon from '@mui/icons-material/PeopleOutlined'
@@ -11,13 +11,14 @@ import 'react-pro-sidebar/dist/css/styles.css'
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
+
   return (
     <MenuItem
-      active={selected === to}
+      active={selected === to} // Changed from selected === title to selected === to
       style={{
         color: colors.grey[100],
       }}
-      onClick={() => setSelected(to)}
+      onClick={() => setSelected(to)} // Ensure this matches the active check
       icon={icon}
     >
       <Typography>{title}</Typography>
@@ -30,8 +31,13 @@ const Sidebar = () => {
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
   const [isCollapsed, setIsCollapsed] = useState(false)
-  const [selected, setSelected] = useState('Dashboard')
+  const [selected, setSelected] = useState('') // Initialize as an empty string or default route
+  const location = useLocation()
 
+  useEffect(() => {
+    // Set selected based on the current path when the component mounts or when the route changes
+    setSelected(location.pathname)
+  }, [location])
   return (
     <Box
       sx={{
@@ -53,7 +59,7 @@ const Sidebar = () => {
       }}
     >
       <ProSidebar collapsed={isCollapsed}>
-        <Menu iconShape="square">
+        <Menu iconShape="square" style={{ overflowY: 'auto' }}>
           {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}

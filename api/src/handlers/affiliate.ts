@@ -44,6 +44,7 @@ export const addAffiliate = async (req: Request, res: Response) => {
     anexaConstanciaDeSituacionFiscal: req.body.anexaConstanciaDeSituacionFiscal,
     anexarSolicitudDeAfiliacion: req.body.anexarSolicitudDeAfiliacion,
     anexarFacturaDeAsociado: req.body.anexarFacturaDeAsociado,
+    tipoAfiliado: req.body.tipoAfiliado,
   }
 
   try {

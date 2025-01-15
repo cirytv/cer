@@ -11,6 +11,8 @@ import useMediaQuery from '@mui/material/useMediaQuery'
 import Header from '../../components/Header'
 import { useAffiliates } from '../../hooks/useAffiliates'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const FormAffiliate = () => {
   const isNonMobile = useMediaQuery('(min-width:600px)')
@@ -22,8 +24,26 @@ const FormAffiliate = () => {
     try {
       const newAffiliate = await addAffiliate(values)
       console.log('Affiliate created: ', newAffiliate)
+      toast.success('Peticion exitosa', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     } catch (error) {
       console.error('Error creating affiliate:', error.message)
+      toast.error('Error al enviar peticion', {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     }
   }
 
