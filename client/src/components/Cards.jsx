@@ -9,15 +9,16 @@ import {
 } from '@mui/material'
 import WhatsAppIcon from '@mui/icons-material/WhatsApp'
 import PersonIcon from '@mui/icons-material/Person'
-import CheckIcon from '@mui/icons-material/Check'
+import CloseIcon from '@mui/icons-material/Close'
 import { tokens } from '../theme'
 
-export default function CongratCard() {
+export default function CongratCard(props) {
+  const { affiliate } = props
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
   const handleCheckClick = () => {
-    console.log('check click')
+    console.log('check click: ', affiliate)
   }
 
   return (
@@ -42,14 +43,15 @@ export default function CongratCard() {
           top: 8,
           right: 8,
           padding: 0,
-          color: 'white',
+          color: colors.redAccent[theme.palette.mode === 'dark' ? 500 : 700],
           '&:hover': {
-            backgroundColor: 'transparent', // No cambiar el fondo al hacer hover
+            backgroundColor:
+              colors.grey[theme.palette.mode === 'dark' ? 300 : 400],
           },
         }}
         aria-label="Check"
       >
-        <CheckIcon sx={{ fontSize: 30 }} />
+        <CloseIcon sx={{ fontSize: 30 }} />
       </IconButton>
 
       <CardContent
@@ -65,7 +67,7 @@ export default function CongratCard() {
             color: colors.grey[theme.palette.mode === 'dark' ? 100 : 200],
           }}
         >
-          🎊 Felicita a Julia 🎊
+          🎊 Felicita a {affiliate.businessName} 🎊
         </Typography>
         <Typography
           variant="body2"
